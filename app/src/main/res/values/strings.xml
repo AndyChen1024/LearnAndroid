@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LearnAndroid</string>
+    <string name="hello_main_fragment">雷猴啊，主界面</string>
 </resources>
