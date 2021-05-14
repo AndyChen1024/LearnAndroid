@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">LearnAndroid</string>
     <string name="hello_main_fragment">雷猴啊，主界面</string>
+    <string name="hello_mine_fragment">我的界面</string>
+    <string name="main_nav_main">首页</string>
+    <string name="main_nav_mine">我的</string>
 </resources>
