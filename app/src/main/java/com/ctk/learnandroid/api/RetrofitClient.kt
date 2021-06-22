@@ -18,27 +18,6 @@ import kotlin.math.log
 class RetrofitClient {
     private val baseUrl = "https://www.wanandroid.com/"
 
-    //    private val httpLoggingInterceptor : HttpLoggingInterceptor by lazy {
-//        httpLoggingInterceptor.apply {
-//            setLevel(HttpLoggingInterceptor.Level.BODY)
-//        }
-//    }
-//    private val okHttpClient: OkHttpClient by lazy {
-//
-//        OkHttpClient().newBuilder()
-//            .addInterceptor(httpLoggingInterceptor)
-//            .build()
-//    }
-//
-//
-//    val service: ApiService by lazy {
-//        val builder = Retrofit.Builder()
-//            .baseUrl(baseUrl)
-//            .client(okHttpClient)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//        builder.create(ApiService::class.java)
-//    }
     private val httpLoggingInterceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
         setLevel(HttpLoggingInterceptor.Level.BODY)
     }

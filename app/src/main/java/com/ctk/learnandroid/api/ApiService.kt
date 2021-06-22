@@ -18,5 +18,5 @@ interface ApiService {
      * 首页轮播图
      */
     @GET("banner/json")
-    fun getBannerData(): Call<BaseBean<List<BannerBean>>>
+    fun getBannerData(): Call<BaseBean<BannerBean>>
 }

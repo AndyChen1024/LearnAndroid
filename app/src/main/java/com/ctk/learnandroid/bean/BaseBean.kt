@@ -1,5 +1,7 @@
 package com.ctk.learnandroid.bean
 
+import java.io.Serializable
+
 /**
  * <pre>
  *     @author : taikang_chen
@@ -8,32 +10,12 @@ package com.ctk.learnandroid.bean
  *     @version: 1.0
  * </pre>
  */
-class BaseBean<T> {
+class BaseBean<T> : Serializable {
     private var data: List<T>? = null
     private var errorCode: Int? = null
     private var errorMsg: String? = null
 
-    fun getData(): List<T>? {
-        return data
-    }
-
-    fun setData(data: List<T>?) {
-        this.data = data
-    }
-
-    fun getErrorCode(): Int? {
-        return errorCode
-    }
-
-    fun setErrorCode(errorCode: Int?) {
-        this.errorCode = errorCode
-    }
-
-    fun getErrorMsg(): String? {
-        return errorMsg
-    }
-
-    fun setErrorMsg(errorMsg: String?) {
-        this.errorMsg = errorMsg
+    override fun toString(): String {
+        return "BaseBean(data=$data, errorCode=$errorCode, errorMsg=$errorMsg)"
     }
 }
