@@ -4,7 +4,10 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
-
+//打包时间
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -15,8 +18,37 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        flavorDimensions "versionCode"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    // 多渠道 的不同配置
+    productFlavors {
+        aaa {
+            // 每个环境包名不同
+            applicationId "com.ctk.learnandroid.aaa"
+            // 动态添加 string.xml 字段；
+            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
+            resValue "string", "app_name", "测试A"
+            resValue "bool", "auto_updates", 'false'
+
+            // 动态修改 常量 字段
+            buildConfigField "String", "ENVIRONMENT", '"我是AAA首页"'
+            // 修改 AndroidManifest.xml 里渠道变量
+            manifestPlaceholders = [CHANNEL_VALUE: "aaa"
+                                    , app_icon   : "@mipmap/pic_a"]
+        }
+        bbb {
+            applicationId "com.ctk.learnandroid.bbb"
+
+            resValue "string", "app_name", "测试B"
+            resValue "bool", "auto_updates", 'false'
+
+            buildConfigField "String", "ENVIRONMENT", '"我是BBB首页"'
+
+            manifestPlaceholders = [CHANNEL_VALUE: "bbb"
+                                    , app_icon   : "@mipmap/pic_b"]
+        }
+
     }
 
     buildTypes {
@@ -24,7 +56,26 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        // 批量打包
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def outputFile = output.outputFile
+                def fileName
+                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                    if (variant.buildType.name.equals('release')) {//如果是release包
+                        fileName = "release_v${defaultConfig.versionName}.apk"
+                    } else if (variant.buildType.name.equals('debug')) {//如果是debug包
+                        fileName = "debug_v${defaultConfig.versionName}.apk"
+                    }
+                    outputFileName = fileName
+                }
+            }
+        }
     }
+
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
