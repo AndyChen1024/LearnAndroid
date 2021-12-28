@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data1"
+            type="String" />
+        <variable
+            name="data2"
+            type="String" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TestActivity">
+
+        <EditText
+            android:id="@+id/et_str_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="第一条String"
+            android:text="@{data1}"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <EditText
+            android:id="@+id/et_str_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="第二条String"
+            android:text="@{data2}"
+            app:layout_constraintTop_toBottomOf="@id/et_str_1"/>
+
+
+        <Button
+            android:id="@+id/btn_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="jump"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

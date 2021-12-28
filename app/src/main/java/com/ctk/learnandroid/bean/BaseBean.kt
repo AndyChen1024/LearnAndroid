@@ -11,7 +11,7 @@ import java.io.Serializable
  * </pre>
  */
 class BaseBean<T> : Serializable {
-    private var data: List<T>? = null
+    public var data: List<T>? = null
     private var errorCode: Int? = null
     private var errorMsg: String? = null
 

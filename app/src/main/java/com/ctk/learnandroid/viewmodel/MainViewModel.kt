@@ -3,7 +3,7 @@ package com.ctk.learnandroid.viewmodel
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.*
 import com.ctk.learnandroid.App
 import com.ctk.learnandroid.api.RetrofitClient
 import com.ctk.learnandroid.base.IBaseViewModel
@@ -21,8 +21,10 @@ import retrofit2.Response
  *     @version: 1.0
  * </pre>
  */
-open class MainVm(application: App) : AndroidViewModel(application),IBaseViewModel {
+open class MainViewModel : ViewModel(), IBaseViewModel {
     private val retrofit: RetrofitClient = RetrofitClient()
+
+    var bannerData: MutableLiveData<BaseBean<BannerBean>> = MutableLiveData()
 
     fun onButtonClicked(view: View) {
 
@@ -33,6 +35,7 @@ open class MainVm(application: App) : AndroidViewModel(application),IBaseViewMod
             ) {
                 Log.d(javaClass.name, response.body().toString())
                 Toast.makeText(view.context, "请求成功", Toast.LENGTH_SHORT).show()
+                bannerData.postValue(response.body())
             }
 
             override fun onFailure(call: Call<BaseBean<BannerBean>>, t: Throwable) {
@@ -42,4 +45,6 @@ open class MainVm(application: App) : AndroidViewModel(application),IBaseViewMod
 
         })
     }
+
+
 }

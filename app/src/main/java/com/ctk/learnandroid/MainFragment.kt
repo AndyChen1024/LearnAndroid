@@ -6,28 +6,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.ctk.learnandroid.binding.EventHandlerListener
+import androidx.fragment.app.viewModels
 import com.ctk.learnandroid.databinding.FragmentMainBinding
-import com.ctk.learnandroid.viewmodel.MainVm
+import com.ctk.learnandroid.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.fragment_main.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MainFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MainFragment : Fragment() {
+
+class MainFragment : Fragment(R.layout.fragment_main) {
+    private val viewModel by viewModels<MainViewModel>()
+    private lateinit var binding: FragmentMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        view = inflater.inflate(R.layout.fragment_main, container, false)
-        val binding: FragmentMainBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
-        binding.viewModel = MainVm(App())
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        viewModel.bannerData.observe(viewLifecycleOwner, {
+            tv_main.text = it?.data?.get(0)?.desc!!
+        })
     }
 
 }

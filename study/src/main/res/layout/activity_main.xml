@@ -4,35 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.ctk.learnandroid.viewmodel.MainViewModel" />
-    </data>
 
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainFragment">
+        tools:context=".MainActivity"
+        android:background="@color/black">
 
-        <TextView
-            android:id="@+id/tv_main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@{viewModel.bannerData.data.get(0).desc}"
-            />
-
-        <Button
-            android:id="@+id/btn_main_test"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="测试"
+            android:background="#FF6633"
+            android:text="跳"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-           android:onClick="@{viewModel.onButtonClicked}"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
