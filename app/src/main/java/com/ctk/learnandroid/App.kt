@@ -1,6 +1,9 @@
 package com.ctk.learnandroid
 
 import android.app.Application
+import com.hjq.permissions.XXPermissions
+import com.liulishuo.filedownloader.FileDownloader
+import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection
 
 /**
  * <pre>
@@ -10,6 +13,28 @@ import android.app.Application
  *     @version: 1.0
  * </pre>
  */
-open class App :Application(){
+open class App : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        initPermission()
+        initDownload()
+    }
 
+    private fun initPermission() {
+//        // 设置权限申请拦截器
+//        // 设置权限申请拦截器
+//        XXPermissions.setInterceptor(PermissionInterceptor())
+    }
+
+    open fun initDownload() {
+        FileDownloader.setupOnApplicationOnCreate(this)
+            .connectionCreator(
+                FileDownloadUrlConnection.Creator(
+                    FileDownloadUrlConnection.Configuration()
+                        .connectTimeout(15000) // set connection timeout.
+                        .readTimeout(15000) // set read timeout.
+                )
+            )
+            .commit()
+    }
 }

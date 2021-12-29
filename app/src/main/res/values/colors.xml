@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="zebra_bg_update_D8">#D9D8D8D8</color>
+    <color name="zebra_text_black_13">#FF131313</color>
+    <color name="text3">#FF333333</color>
+    <color name="zebra_point_gray">#FFADADAD</color>
+    <color name="text_blue_20">#2065FF</color>
+    <color name="zebra_white">#FFFFFFFF</color>
+    <color name="zebra_bg_gray_D8">#FFD8D8D8</color>
+    <color name="zebra_progress">#FD995D</color>
+
 </resources>
