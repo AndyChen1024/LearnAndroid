@@ -23,6 +23,7 @@ import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.LogUtils.D
 import com.blankj.utilcode.util.LogUtils.E
+import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.ctk.learnandroid.databinding.FragmentMainBinding
 import com.ctk.learnandroid.viewmodel.MainViewModel
@@ -54,6 +55,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private val url = "https://github.com/AndyChen1024/LearnAndroid/blob/main/apk/debug_v1.0.apk"
+    private val apkName = url.substring(url.lastIndexOf("/"))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -69,7 +71,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             binding.tvUpdateLoading.visibility = View.GONE
             binding.pbLoading.visibility = View.VISIBLE
             FileDownloader.getImpl().create(url)
-                .setPath(getPath() + "debug_v1.0.apk")
+                .setPath(getPath() + apkName)
                 .setListener(
                     object : FileDownloadListener() {
                         override fun pending(
@@ -107,7 +109,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                             ToastUtils.showShort("下载完成")
                             promptInstall(
                                 getPath(),
-                                "debug_v1.0.apk"
+                                apkName
                             )
                         }
 
@@ -125,13 +127,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
 
                         override fun error(task: BaseDownloadTask?, e: Throwable?) {
+                            resetDownload()
                             ToastUtils.showShort(e?.message)
-
                             LogUtils.log(E, "downloadError", e?.message)
                         }
 
                         override fun warn(task: BaseDownloadTask?) {
-//                            TODO("Not yet implemented")
+
                         }
 
                     }).start()
@@ -167,6 +169,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun initDownload() {
         FileUtils.createOrExistsDir(getPath())
+    }
+
+    fun resetDownload(){
+        binding.pbLoading.visibility = View.GONE
+        binding.tvSpeed.visibility = View.GONE
+        binding.tvUpdateLoading.visibility = View.VISIBLE
     }
 
     /**

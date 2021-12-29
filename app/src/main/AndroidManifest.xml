@@ -16,6 +16,7 @@
         android:roundIcon="${app_icon}"
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.LearnAndroid">
         <meta-data
             android:name="icon"
