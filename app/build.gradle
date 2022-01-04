@@ -1,23 +1,25 @@
+import com.ctk.base_framework.*
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
 }
 //打包时间
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
 
     defaultConfig {
         applicationId "com.ctk.learnandroid"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion BuildConfig.minSdkVersion
+        targetSdkVersion BuildConfig.targetSdkVersion
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
         flavorDimensions "versionCode"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -81,35 +83,49 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8
     }
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 }
 
 dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+//    implementation project(path: ':base_framework')
+    implementation Kt.stdlibJdk8
+    implementation AndroidX.coreKtx
+    implementation AndroidX.appcompat
+    implementation AndroidX.constraintlayout
+    implementation AndroidX.pagingRuntime
+    implementation Android.material
+    implementation Fragment.runtimeKtx
+    implementation Navigation.ui
+    implementation Navigation.fragment
+    implementation Depend.timber
+    implementation Room.runtime
+    kapt Room.compiler
+    implementation Anko.common
+    implementation Retrofit.runtime
+    implementation Retrofit.gson
+    implementation Retrofit.logging
+    implementation AndroidX.cardview
+    implementation AndroidX.appStartup
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
-    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.3.0'
+    implementation Hilt.daggerRuntime
+    kapt Hilt.daggerCompiler
+    implementation Hilt.viewModule
+    kapt Hilt.compiler
 
-    implementation 'com.blankj:utilcodex:1.30.6'
+//    implementation Depend.binding
+//    implementation Depend.jDatabinding
+    implementation Depend.utils
+    implementation Depend.fileDown
+    implementation Depend.permission
 
-    //流利说下载
-    implementation 'com.liulishuo.filedownloader:library:1.7.7'
-    // 权限请求框架：https://github.com/getActivity/XXPermissions
-    implementation 'com.github.getActivity:XXPermissions:13.2'
-
+//    implementation project(":feature-task")
+    testImplementation Depend.junit
+    androidTestImplementation Depend.androidTestJunit
+    androidTestImplementation Depend.espressoCore
 }

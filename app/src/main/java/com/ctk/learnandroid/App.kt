@@ -1,7 +1,6 @@
 package com.ctk.learnandroid
 
 import android.app.Application
-import com.hjq.permissions.XXPermissions
 import com.liulishuo.filedownloader.FileDownloader
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection
 

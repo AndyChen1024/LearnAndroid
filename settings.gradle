@@ -1,3 +1,4 @@
-include ':app'
+includeBuild("base_framework")
+include ':app', ':study'
 rootProject.name = "LearnAndroid"
-include ':study'
+

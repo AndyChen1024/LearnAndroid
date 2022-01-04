@@ -7,22 +7,44 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.3"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
-
+        classpath "com.android.tools.build:gradle:4.1.1"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
-    }
-}
+//allprojects {
+//    repositories {
+//        google()
+//        mavenCentral()
+//        maven { url 'https://jitpack.io' }
+//    }
+//}
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+//subprojects { subproject ->
+//    // 应用所有子项目中
+//    apply plugin: 'com.ctk.base_framework.plugin'
+//
+//    // 如果想应用到某个子项目中，可以通过 subproject.name 来判断应用在哪个子项目中
+//    // subproject.name 是你子项目的名字
+//    // 官方文档地址：https://guides.gradle.org/creating-multi-project-builds/#add_documentation
+//    if (subproject.name == "app") {
+//        // 示例可以点击下方链接，查看我另外一个项目
+//        // https://github.com/hi-dhl/ComposingBuilds-vs-buildSrc/blob/a339c8a24764f8fd212768286cc941aaac48b4ad/Project-ComposingBuild/build.gradle#L20-L50
+//
+//    }
+//}
+/**
+ * plugins {} 默认的行为是解析和应用插件
+ * apply false 告诉 Gradle 不要应用插件
+ * 在多项目构建中，可以通过 subprojects{} 应用在子项目中
+ */
+plugins {
+    // 这个 id 就是在 versionPlugin 文件夹下 build.gradle 文件内定义的id
+    id "com.ctk.base_framework" apply false
 }
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}
+apply from: 'subproject.gradle'
