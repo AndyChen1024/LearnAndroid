@@ -69,5 +69,3 @@ for (def line : lines) {
     }
 }
 configFile.write(configContent.substring(ls.length()).toString())
-include ':lib:base'
-include ':lib:common'
